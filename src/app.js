@@ -6,7 +6,8 @@ app.use("/test//hi", (req, res)=>{
     res.send("Test page 2")
 })
 
-app.get("/user", (req, res)=>{
+app.get("/user/:userId/:name", (req, res)=>{
+    console.log(req.params)
     res.send({
         name:"Ananthu",
         age:25
