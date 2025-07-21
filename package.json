@@ -1,0 +1,16 @@
+{
+  "name": "devlok-backend",
+  "version": "1.0.0",
+  "description": "backend of new project devLok",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Ananthakrishna Bhat G",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
