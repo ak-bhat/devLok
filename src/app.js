@@ -1,25 +1,33 @@
-const express = require('express')
+const express = require("express");
+const app = express();
+const connectDB = require("./config/database");
+const User = require("./models/user");
 
-const app = express()
+app.post("/signup", async (req, res) => {
+  const dummyData = {
+    firstName: "Virat",
+    lastName: "Kohli",
+    email: "Virat@gmail.com",
+    password: "virat@123",
+  };
 
-const {adminAuth, userAuth} = require('./middlewares/auth')
+  const user = new User(dummyData);
 
-app.use("/admin",adminAuth)
+  try {
+    await user.save();
+    res.send("User added successfully");
+  } catch (err) {
+    res.status(400).send("Error in adding data "+err.message)
+  }
+});
 
-app.get("/admin/123", (req, res, next)=>{
-    throw new Error("Random Error")
-    res.send("Admin page")
-})
-
-app.use("/", (err,req, res, next)=>{
-    if(err){
-        res.status(500).send("Random Error")
-    }
-    res.send("Admin page")
-})
-
-
-
-app.listen(7777,()=>{
-    console.log("Server running at 7777")
-})
+connectDB()
+  .then(() => {
+    console.log("database connection successfull");
+    app.listen(7777, () => {
+      console.log("Server running at 7777");
+    });
+  })
+  .catch((err) => {
+    console.log("Error in db connection");
+  });
